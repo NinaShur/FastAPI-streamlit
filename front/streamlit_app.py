@@ -11,7 +11,7 @@ def main():
         if st.button("Detect!") and image is not None:
             st.image(image)
             files = {"file": image.getvalue()}
-            res = requests.post("http://127.0.0.1:8000/clf_image", files=files).json()
+            res = requests.post("http://89.169.168.148:8000/clf_image", files=files).json()
             st.write(f'Objects detected: {res["total_objects"]}')
             for det in res["detections"]:
                 st.write(f'{det["class_name"]}: {det["confidence"]:.2f}')
@@ -20,7 +20,7 @@ def main():
         txt = st.text_input('Analyze text sentiment')
         if st.button('Analyze'):
             text = {'text': txt}
-            res = requests.post("http://127.0.0.1:8000/clf_text", json=text).json()
+            res = requests.post("http://89.169.168.148:8000/clf_text", json=text).json()
             st.write(f'Sentiment: {res["label"]}')
             st.write(f'Confidence: {res["prob"]:.2f}')
         
@@ -32,7 +32,7 @@ def main():
             submitted = st.form_submit_button("Predict!")
             if submitted:
                 vector = {'feature1': feature1, 'feature2': feature2}
-                res = requests.post("http://127.0.0.1:8000/clf_table", json=vector).json()
+                res = requests.post("http://89.169.168.148:8000/clf_table", json=vector).json()
                 st.write(f"Predicted: {res['prediction']}")
 
 if __name__ == '__main__':
